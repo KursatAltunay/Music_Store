@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="dvSepet" class="col-lg-8">
+    @Html.Action("_CartList", "Cart")
+</div>
+
+@section scripts{
+    <script>
+        function CartUpdate(deger, gid) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("UpdateCart","Cart")',
+                data: { amount: deger, id: gid },
+                success: function (data) {
+                    $("#dvSepet").html(data);
+                }
+            })
+        }
+
+        function DeleteItemCart(gid) {
+            var cvp = confirm("Albümü sepetten çıkarmak istediğinize emin misiniz?");
+            if (cvp) {
+                $.ajax({
+                    type: "Get",
+                    url: '@Url.Action("DeleteItemCart","Cart")',
+                    data: { id: gid },
+                    success: function (data) {
+                        $("#dvSepet").html(data);
+                    }
+                })
+            }
+        }
+    </script>
+}

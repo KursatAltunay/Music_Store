@@ -1,0 +1,43 @@
+﻿@using MusicStoreSites.UI.MVC.Models
+@model CartItemDTO
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Amount</th>
+            <th>SubTotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (CartItemDTO item in (Session["cart"] as MyCart).GetAllCartItem)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>
+                    <input type="number" id="txtAmount" value="@item.Amount" min="0" onchange="CartUpdate(this.value,@item.ID)" />                  
+                </td>
+                <td>@item.SubTotal</td>
+                <td>
+                    <a href="Javascript:void(0)" onclick="DeleteItemCart(@item.ID)">Delete</a>                   
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4">Total:</td>
+            <td>
+                @((Session["cart"] as MyCart).GetAllCartItem.Sum(x => x.SubTotal).ToString("C2"))
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.ActionLink("Sepeti Onayla", "ConfirmCart", "Order",new {@class="btn btn-success"})
+               
+            </td>
+        </tr>
+    </tfoot>
+</table>

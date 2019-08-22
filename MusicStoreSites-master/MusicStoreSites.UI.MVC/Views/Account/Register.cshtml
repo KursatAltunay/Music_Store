@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+@model User
+    <div class="col-lg-12">
+        <div class="col-lg-5 mt-15">
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <h3 class="animated swing delay-2s">Kullanıcı kayıt ekranı</h3>
+                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post))
+                    {
+                    <fieldset>
+                        <p>
+                            <label>Kullanıcı Adı:</label>
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>Ad:</label>
+                            @Html.TextBoxFor(x => x.Firstname, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>Soyad:</label>
+                            @Html.TextBoxFor(x => x.Lastname, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>EMail:</label>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>Şifre:</label>
+                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>Adres:</label>
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>Telefon:</label>
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <label>Doğum Tarihi:</label>
+                            @Html.TextBoxFor(x => x.BirthDate, new { @class = "form-control", type = "date" })
+                        </p>
+                        <p>
+                            <label>Açıklama:</label>
+                            @Html.TextAreaFor(x => x.Notes, new { @class = "form-control" })
+                        </p>
+                        <p>
+                            <input type="submit" name="name" value="Kaydet" class="btn btn-success" />
+                         
+                        </p>
+                    </fieldset>
+                    }
+
+                </div>
+
+                <div class="panel-footer">
+                    @if(ViewBag.Error != null)
+                    {
+                        <span>@ViewBag.Error</span>
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+

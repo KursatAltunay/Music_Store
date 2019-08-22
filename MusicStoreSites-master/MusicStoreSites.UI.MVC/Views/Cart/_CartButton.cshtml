@@ -1,0 +1,4 @@
+﻿@using MusicStoreSites.UI.MVC.Models
+@model MyCart
+
+@Html.ActionLink("("+(Session["cart"] as MyCart).TotalAmount+")","Index","Cart")

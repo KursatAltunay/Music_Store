@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+@model User
+<div class="col-lg-12">
+    <div class="col-lg-5 mt-15">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="animated swing delay-2s">Kullanıcı Giriş ekranı</h3>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    <fieldset>
+                        <p>
+                            <label>Kullanıcı Adı:</label>
+                            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+                        </p>                        
+                        <p>
+                            <label>Şifre:</label>
+                            @Html.TextBoxFor(x => x.Password, new { @class = "form-control",type="password" })
+                        </p>                        
+                        <p>
+                            <input type="submit" name="name" value="Giriş Yap" class="btn btn-success" />
+                            @Html.ActionLink("Üye Ol","Register","Account",new { @class="alert-success"})
+                        </p>
+                    </fieldset>
+                }
+
+            </div>
+
+            <div class="panel-footer">
+                @if (ViewBag.Error != null)
+                {
+                    <span>@ViewBag.Error</span>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+

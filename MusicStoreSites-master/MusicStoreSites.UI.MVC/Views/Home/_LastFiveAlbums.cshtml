@@ -1,0 +1,24 @@
+﻿@model List<Album>
+
+@foreach (Album item in Model)
+    {
+<div class="single-music-chart style-2 d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="500ms">
+    <!-- Music Content -->
+    <div class="music-content d-flex align-items-center">
+        <div class="music-thumb">
+            <img src="@item.AlbumArtUrl" alt="@item.Title">
+        </div>
+        <div class="music-title mr-30">
+            <span title="@item.Title">
+                @item.Title.Substring(0, 2).....
+            </span>
+        </div>
+        <div class="music-price">
+            <a href="#" class="btn razo-btn">$@item.Price</a>
+        </div>
+        <div class="col-lg-3">
+            <input type="button" name="name" class="btn btn-warning" value="Add Cart" />
+        </div>
+    </div>
+</div>
+    }

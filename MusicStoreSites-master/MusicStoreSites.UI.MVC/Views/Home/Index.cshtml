@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@model List<Album>
+
+
+<section class="show-routine-area section-padding-80-0 mb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav nav-tabs" id="showRoutineTab" role="tablist">
+                    <!-- Single Nav Item -->
+                    <li class="nav-item active">
+                        <a class="nav-link" id="tab-2" data-toggle="tab" href="#tab2" role="tab" aria-controls="tab2" aria-selected="false" onclick="AlbumAc()">
+                            Albüm Türleri
+                        </a>
+                    </li>
+                    <!-- Single Nav Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-3" data-toggle="tab" href="#tab3" role="tab" aria-controls="tab3" aria-selected="false" onclick="IndirimAc()">
+                            İNDİRİMDEKİLER
+                        </a>
+                    </li>
+                    <!-- Single Nav Item -->
+                    <li class="nav-item">
+                        <a class="nav-link" id="tab-4" data-toggle="tab" href="#tab4" role="tab" aria-controls="tab4" aria-selected="false" onclick="SonBes()">
+                            Son Eklenen 5 Albüm
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-4">
+                <div id="genreMenu">
+                    @Html.Action("_GenreMenu", "Home")
+                </div>
+            </div>
+            <div id="albumList" class="col-lg-8">
+                @Html.Action("_GenreOfAlbums", "Home")
+            </div>
+            <div id="tab3" class="fadeIn" style="display:none;">
+                <div class="col-lg-8">
+                    @Html.Action("_GetDiscontinuedAlbums", "Home")
+                </div>
+            </div>
+            <div id="tab4" class="fadeIn" style="display:none;">
+                <div class="col-lg-8">
+                    @Html.Action("_LastFiveAlbums","Home")
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+
+@section scripts{
+    <script>
+
+        function GenreByAlbumList(id) {
+            $("genreMenu div").removeClass("active");
+            $("#menu_" + id).addClass("active");
+
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("_GenreOfAlbums","Home")',
+                data: { id: id },
+                success: function (data) {
+                    $("#albumList").html(data);
+                }
+            })
+        }
+        function kapa() {
+            $("#albumList").css("display", "none", "position", "absolute")
+            $("#tab3").css("display", "none", "position", "absolute")
+            $("#tab4").css("display", "none", "position", "absolute")
+        }
+        function IndirimAc() {
+            kapa();
+            $("#tab3").css("display", "inline-block", "position", "relative")
+        }
+        function AlbumAc() {
+            kapa();
+            $("#albumList").css("display", "inline-block", "position", "relative")
+        }
+        function SonBes() {
+            kapa();
+            $("#tab4").css("display", "inline-block", "position", "relative");
+        }    
+
+        function AddToMyCart(aid) {
+            $.ajax({
+                type: "Get",
+                url: '@Url.Action("AddToCart","Cart")',
+                data: { id: aid },
+                success: function (data) {
+                    $("#menu div:nth-child(2)").html(data);
+                }
+            })
+        }
+
+
+    </script>
+}
+
+
+

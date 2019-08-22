@@ -1,0 +1,16 @@
+﻿
+@model List<Genre>
+
+@foreach (Genre item in Model)
+{
+    <div class="single-music-chart style-2 d-flex align-items-center justify-content-between wow fadeInUp" data-wow-delay="900ms">
+        <!-- Music Content -->
+        <div class="music-content d-flex align-items-center">
+            <div id="menu_@item.ID" class="music-title">
+                <a href="javascript:void(0)" onclick="GenreByAlbumList(@item.ID)">
+                    @item.Name
+                </a>
+            </div>
+        </div>
+    </div>
+}
